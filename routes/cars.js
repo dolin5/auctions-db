@@ -10,9 +10,7 @@ router.use(bodyParser.urlencoded({limit: '50mb'}));
 router.use(bodyParser({limit: '50mb'}));
 
 router.route('/').get((req, res) => {
-  Car.find()
-    .then(cars => res.json(cars))
-    .catch(err => res.status(400).json('Error: ' + err));
+  res.send('hello')
 });
 
 router.route('/add').post((req, res) => {
@@ -29,13 +27,13 @@ router.route('/exists').get(async(req,res)=>{
   res.send(result?true:false);
 })
 
-router.route('/ids').get(async(req,res)=>{
-  let result = await Car.distinct('id');
-  res.send(result);
+router.route('/get-all').get(async(req,res)=>{
+  Car.find()
+    .then(cars => res.json(cars))
+    .catch(err => res.status(400).json('Error: ' + err));
 })
 
 router.route('/load-closed').post(async(req,res)=>{
-  let input = req.query.auctions;
   let result = await Car.distinct('id');
   res.send(result);
 })
