@@ -34,6 +34,10 @@ app.use('/cars', carsRouter);
 
 // }
 
+app.route('/').get((req, res) => {
+  res.send('serving at /cars/')
+});
+
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 })
